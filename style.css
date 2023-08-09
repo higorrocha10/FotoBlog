@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  font-size: 62.5%; /* 10px */
+
+  --hue: 320; /*  HSL =  Hue (Tono/color), Saturation (saturación) y Lightness (luminosidad) */
+  --color-base-white: hsl(0, 0%, 100%);
+  --color-base-gray-100: hsl(0, 0%, 96%);
+  --color-base-gray-300: hsl(var(--hue), 6%, 58%);
+  --color-base-gray-500: hsl(0, 0%, 24%);
+  --color-base-gray-900: hsl(var(--hue), 6%, 13%);
+}
+
+html,
+body,
+input {
+  font-family: "Mulish", sans-serif;
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: var(--color-base-white);
+  color: var(--color-base-gray-900);
+}
+
+#app {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  height: 100vh;
+}
+
+.container {
+  padding: 1.6rem 3.2rem;
+  width: min(112rem, 100%); /* Cogerá la anachura mínima de 1120px */
+  margin: 0 auto;
+}
+
+main {
+  background-color: var(--color-base-gray-100);
+  overflow-y: scroll; /* Desplazamiento solo del main, dejando al footer fijo  */
+}
+
+header,
+nav,
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 7.2rem;
+  font-weight: 700;
+}
+
+nav ul {
+  list-style: none;
+  font-size: 1.8rem;
+  color: var(--color-base-gray-300);
+}
+
+ul li.active {
+  color: var(--color-base-gray-900);
+}
+
+header form {
+  flex: 1;
+}
+
+.input-wrapper label {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 1.6rem;
+  background-color: var(--color-base-gray-100);
+  border: 0;
+  border-radius: 0.6rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  opacity: 0.56;
+}
+
+.input-wrapper input::placeholder {
+  color: var(--color-base-gray-500);
+}
+
+.avatar {
+  width: 4.2rem;
+  height: 4.2rem;
+  object-fit: cover; /* La imagen debería redimensionarse para ajustarse a su contenedor. */
+
+  border-radius: 50%;
+}
+
+/* GALERIA DE FOTOS */
+
+main h1 {
+  padding-top: 1.6rem;
+  font-size: 2.4rem;
+}
+
+.gallery {
+  margin-top: 3.2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+}
+
+.item {
+  background-color: var(--color-base-white);
+  border-radius: 0.8rem;
+  overflow: hidden; /* Todo lo que sobra por fuera de la imagen, lo ocultará. */
+}
+
+.item img {
+  /*  filter: grayscale(1); Aplicando filtro negro-blanco a las imagenes */
+  width: 100%;
+  aspect-ratio: 16/9; /* Proporción de la imagen. 16 seria igual el ancho y 9 es igual a la altura. */
+  object-fit: cover;
+
+  /* transition-property: all;
+  transition-duration: 200ms;
+  transition-delay: 0;
+  transition-timing-function: ease-out; */
+  transition: all 200ms ease-out;
+  display: block; /* Desaparecer espacios entre los elementos */
+}
+
+.item img:hover {
+  filter: hue-rotate(7deg) contrast(101%) saturate(200%); /* Aplicando filtros a las imagenes */
+  transform: scale(1.1);
+}
+
+.details {
+  padding: 2.2rem;
+  background-color: var(--color-base-white);
+  z-index: 1;
+  position: relative;
+}
+
+.details h2 {
+  font-size: 1.8rem;
+}
+
+.tags {
+  margin-top: 1.2rem;
+}
+
+.tags span {
+  padding: 0.6rem;
+  background-color: var(--color-base-gray-100);
+  border-radius: 0.4rem;
+  line-height: 0;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+/* FOOTER */
+
+footer p {
+  text-align: center;
+  padding: 1.6rem;
+  font-weight: 600;
+}
+
+/* ANIMATION CSS */
+
+header {
+  --startY: -100%;
+  animation: move 0.2s;
+}
+
+footer {
+  --startY: 100%;
+  animation: move 0.2s;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(var(--startY));
+  }
+}
+
+.item {
+  --delay: 0.4s;
+  animation: appear 0.4s var(--delay) backwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
